@@ -1,5 +1,126 @@
 <html>
+<head>
+<body bgcolor="#E8E8E8">
+<style>
+    p.sansserif {
+        font-family: Impact, Charcoal, sans-serif;
+    }
+    div.a {
+    font-size: 100px;
+    }
+        * {
+      box-sizing: border-box;
+    }
 
-this is my homepage
+    .column {
+      float: left;
+      width: 33.33%;
+      padding: 5px;
+    }
+
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 30%;
+    }
+
+    td, th {
+      border: 3px solid #dddddd;
+      text-align: left;
+      padding: 1px;
+    }
+
+</style> 
+</head>
+    <body>
+      <center><img src="Legendary-Motorsport-Logo.png" alt="logo" width="342" height="160"></center>  
+        <center><img src="car.jpg" alt="car" width="396" height="295.5"><img src="corvette-logo.jpeg" alt="car" width="396" height="295.5"><img src="chiron.jpeg" alt="car" width="396" height="295.5"></center>
+         
+
+        <center><p class="sansserif"></p><div class="a">THE GALLERY</div></p></center>
+        
+        <div class="row">
+          <div class="column">
+            <img src="ssc-ult-aero.jpeg" alt="SSC" style="width:100%">
+          </div>
+          <div class="column">
+            <img src="9ff-GT9-R.jpg" alt="Porche" style="width:100%">
+          </div>
+          <div class="column">
+            <img src="agera.jpg" alt="Koenigsegg" style="width:100%">
+          </div>
+        </div>
+    
+        <div class="row">
+          <div class="column">
+            <table>
+              <tr>
+                <th>Engine</th>
+                <th>Horsepower</th>
+                <th>Max Speed</th>
+                <th>Weight</th>  
+              </tr>
+              <tr>
+                <td>Twin-turbocharged 423.6 cu in (6,942 cc) SSC V8</td>
+                <td>1,300 bhp (969 kW; 1,318 PS) @ 6800 rpm</td>
+                <td> 256 mph (412 km/h)</td>
+                <td>2,800 lb (1,270 kg)</td>  
+              </tr>
+            </table>
+              </div>
+          <div class="column">
+            <table>
+              <tr>
+                <th>Engine</th>
+                <th>Horsepower</th>
+                <th>Max Speed</th>
+                <th>Weight</th>  
+              </tr>
+              <tr>
+                <td>Conventional Twin Turbocharged 6 cyl</td>
+                <td>1,300 bhp @ max rpm</td>
+                <td> 257 mph (414 km/h)</td>
+                <td>2924 lb (1,326 kg)</td>  
+              </tr>
+            </table>
+          </div>
+          <div class="column">
+            <table>
+              <tr>
+                <th>Engine</th>
+                <th>Horsepower</th>
+                <th>Max Speed</th>
+                <th>Weight</th>  
+              </tr>
+              <tr>
+                <td>5.0-litre twin-turbocharged V8 engine</td>
+                <td>11,160 hp @ 7,800 rpm</td>
+                <td> 273 mph (439 km/h)</td>
+                <td>2,930 lb (1,330 kg)</td>  
+              </tr>
+            </table>
+            
+          </div>
+        </div>
+    
+        <div class="row">
+          <div class="column">
+            <p><a href="https://en.wikipedia.org/wiki/SSC_Aero">More information here</a></p>
+          </div>
+          <div class="column">
+            <p><a href="http://www.supercarworld.com/cgi-bin/showgeneral.cgi?441">More information here</a></p>
+          </div>
+          <div class="column">
+            <p><a href="https://en.wikipedia.org/wiki/Koenigsegg_Agera">More information here</a></p>
+          </div>
+        </div>
+
+    </body>
+    
 
 </html>
