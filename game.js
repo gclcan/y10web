@@ -6,8 +6,9 @@ window.onload = function() {
         key = [];
         pause = false,
         score = 0,
-        lives = 3;
-        
+        lives = 3,
+        gameover = false;
+        scene = 0;
     
 
     //Key handling
@@ -23,8 +24,32 @@ window.onload = function() {
     DOWN = 40;
     LEFT = 37;
     SPACE = 32;
+    Q = 81;
+    ENTER = 13;
+    
+    //sprites
+    loaded = 0;
+    sprites =[];
+    sprites[0] = new Image();
+    sprites[0].src = "paddle.jpg"
+    sprites[1] = new Image();
+    sprites[1].src = "ball.png"
+    sprites[2] = new Image();
+    sprites[2].src = "brick.png"
+    
+    for(var i=0; i<sprites.length; i++){
+        sprites[i].onload = function(){
+            loaded++;
+        }
+        if(loaded == 3){
+            run();
+        }
+    }
+    
+    
     //game objects
     player = {
+        sprite:sprites[0], 
         x: width/2 -32,
         y: height - 32,
         update: function(){
@@ -38,12 +63,13 @@ window.onload = function() {
             if(this.x >= width - 64){this.x = width - 64;}
 
         },
-        render: function(){
-            c.strokeRect(this.x,this.y,64,16);
+        render:function(){
+            c.drawImage(this.sprite,this.x,this.y);
         }
     };
      
     ball = {
+        sprite:sprites[1], 
         x:player.x+32,
         y:player.y-16,
         dx:2,
@@ -87,6 +113,7 @@ window.onload = function() {
     brick = [];
     for(var i=0; i<8; i++){
         brick[i] = {
+            sprite:sprites[2],
             x: 64+(i*64),
             y : 32,
             broken:false,
@@ -107,36 +134,81 @@ window.onload = function() {
         }
     }
     //
-    function update(){
-        player.update();
+    gameScene = {
+      update:function(){
+              player.update();
         ball.update();
         for(var i=0; i<8; i++){
             brick[i].update();
         }
-    }
-    function render(){
+        if(lives<=0){
+            gameover = true;
+        }
+        if(gameover){
+            pause = true;        
+        }
+      },
+      render:function(){
         c.fillStyle = "white";
         c.fillRect(0,0,width,height);
         c.fillStyle = "black";
         
         player.render();
         ball.render();
-         for(var i=0; i<8; i++){
+        for(var i=0; i<8; i++){
             brick[i].render();
         }
         c.fillText("Score : " + score,16,16);
         c.fillText("Lives : " + lives,16,32);
+        if(gameover){
+            c.fillText("Game Over", width/2, height/2);
+        }
+        if(pause && !gameover){
+            c.fillText("Game Paused", width/2, height/2);
+        }
+      }
+    }
+    
+    mainMenuScene = {
+        update:function(){
+            if(key[ENTER]){
+                scene = 1 ;
+            }
+        },
+        render:function(){
+            c.fillStyle = "white";
+            c.fillRect(0,0,width,height);
+            c.fillStyle ="black";
+            c.fillText("BREAKOUT GAME",width/2-50,100);
+            c.fillText("Press ENTER To Play",width/2-50 ,200);
+        }
     }
 
     function run(){
-        if(!pause){
-            update();
+        switch(scene){
+                case 0:
+                    gameover = false;
+                    lives = 3;
+                    score = 0;
+                    mainMenuScene.update();
+                    mainMenuScene.render();
+                break;
+
+                case 1:
+                    if(!pause){
+                        gameScene.update();
+                    }
+                    if(key[Q] && !gameover){
+                        pause = !pause;
+                    }
+                     if(key[Q] && gameover){
+                        scene = 0;
+                    } 
+                gameScene.render();
+            break;
         }
-        render();
         requestAnimationFrame(run);
     }
 
-    run();
-        
 }
     
